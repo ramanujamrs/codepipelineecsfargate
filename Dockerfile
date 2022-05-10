@@ -1,4 +1,13 @@
-FROM public.ecr.aws/docker/library/php:7.4-cli
-COPY . /usr/src/myapp
-WORKDIR /usr/src/myapp
-CMD [ "php", "./your-script.php" ]
+FROM public.ecr.aws/docker/library/node:18.1.0-slim
+
+WORKDIR /usr/src/app
+
+COPY package.json .
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 8080
+
+CMD [ "node", "server.js" ]
